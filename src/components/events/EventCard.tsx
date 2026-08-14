@@ -21,6 +21,10 @@ export function EventCard({ event }: EventCardProps) {
             alt={event.title}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            // Admin pastes an arbitrary external URL (see ImageUrlField) —
+            // the optimizer only allow-lists Firebase Storage, so this must
+            // skip it rather than fail to load on any other host.
+            unoptimized
             className="object-cover"
           />
         ) : (

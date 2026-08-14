@@ -29,5 +29,6 @@ export interface EventFormData {
   title: string;
   description: string;
   date: string;
-  imageFile?: File | null;
+  // Pasted link rather than an uploaded file — see ImageUrlField for why.
+  imageUrl: string;
 }

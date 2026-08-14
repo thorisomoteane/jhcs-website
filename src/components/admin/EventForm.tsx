@@ -3,18 +3,13 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import type { Event, EventFormData } from "@/types/event";
-import {
-  createEvent,
-  deleteEvent,
-  updateEvent,
-} from "@/lib/firebase/firestore";
-import { deleteEventImage, uploadEventImage } from "@/lib/firebase/storage";
+import { createEvent, deleteEvent, updateEvent } from "@/lib/firebase/firestore";
 import { getEventStatus } from "@/lib/utils/dates";
 import { describeError } from "@/lib/utils/errors";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { ImageUpload } from "./ImageUpload";
+import { ImageUrlField } from "./ImageUrlField";
 
 interface EventFormProps {
   event?: Event | null;
@@ -26,7 +21,7 @@ const emptyForm: EventFormData = {
   title: "",
   description: "",
   date: "",
-  imageFile: null,
+  imageUrl: "",
 };
 
 function toFormData(event?: Event | null): EventFormData {
@@ -35,7 +30,7 @@ function toFormData(event?: Event | null): EventFormData {
     title: event.title,
     description: event.description,
     date: event.date.toISOString().slice(0, 16),
-    imageFile: null,
+    imageUrl: event.imageUrl ?? "",
   };
 }
 
@@ -46,21 +41,7 @@ function toFormData(event?: Event | null): EventFormData {
  */
 export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
   const [form, setForm] = useState<EventFormData>(() => toFormData(event));
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>(
-    event?.imageUrl,
-  );
   const [submitting, setSubmitting] = useState(false);
-
-  function handleFileSelect(file: File | null) {
-    setForm((prev) => ({ ...prev, imageFile: file }));
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
-    } else if (event?.imageUrl) {
-      setPreviewUrl(event.imageUrl);
-    } else {
-      setPreviewUrl(undefined);
-    }
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -73,49 +54,25 @@ export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
     try {
       const eventDate = new Date(form.date);
       const status = getEventStatus(eventDate);
+      const imageUrl = form.imageUrl.trim() || undefined;
 
       if (event) {
-        let imageUrl = event.imageUrl;
-        let imagePath = event.imagePath;
-
-        if (form.imageFile) {
-          if (event.imagePath) {
-            try {
-              await deleteEventImage(event.imagePath);
-            } catch (err) {
-              // ignore if old image already deleted, but keep the reason visible
-              console.warn("Could not delete previous event image:", describeError(err));
-            }
-          }
-          const uploaded = await uploadEventImage(event.id, form.imageFile);
-          imageUrl = uploaded.imageUrl;
-          imagePath = uploaded.imagePath;
-        }
-
         await updateEvent(event.id, {
           title: form.title.trim(),
           description: form.description.trim(),
           date: eventDate,
           status,
           imageUrl,
-          imagePath,
         });
         toast.success("Event updated successfully.");
       } else {
-        const id = await createEvent({
+        await createEvent({
           title: form.title.trim(),
           description: form.description.trim(),
           date: eventDate,
           status,
+          imageUrl,
         });
-
-        if (form.imageFile) {
-          const uploaded = await uploadEventImage(id, form.imageFile);
-          await updateEvent(id, {
-            imageUrl: uploaded.imageUrl,
-            imagePath: uploaded.imagePath,
-          });
-        }
         toast.success("Event created successfully.");
       }
 
@@ -150,7 +107,11 @@ export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
         value={form.date}
         onChange={(e) => setForm((prev) => ({ ...prev, date: e.target.value }))}
       />
-      <ImageUpload currentUrl={previewUrl} onFileSelect={handleFileSelect} />
+      <ImageUrlField
+        label="Event Image URL"
+        value={form.imageUrl}
+        onChange={(imageUrl) => setForm((prev) => ({ ...prev, imageUrl }))}
+      />
 
       <div className="flex gap-3 pt-2">
         <Button type="submit" disabled={submitting}>
@@ -168,14 +129,6 @@ export async function handleDeleteEvent(event: Event, onSuccess: () => void) {
   if (!confirm(`Delete "${event.title}"? This cannot be undone.`)) return;
 
   try {
-    if (event.imagePath) {
-      try {
-        await deleteEventImage(event.imagePath);
-      } catch (err) {
-        // ignore if image already deleted, but keep the reason visible
-        console.warn("Could not delete event image:", describeError(err));
-      }
-    }
     await deleteEvent(event.id);
     toast.success("Event deleted.");
     onSuccess();

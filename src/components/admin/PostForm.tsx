@@ -4,12 +4,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import type { Post, PostFormData, PostStatus } from "@/types/post";
 import { createPost, deletePost, updatePost } from "@/lib/firebase/firestore";
-import { deletePostImage, uploadPostImage } from "@/lib/firebase/storage";
 import { describeError } from "@/lib/utils/errors";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { ImageUpload } from "./ImageUpload";
+import { ImageUrlField } from "./ImageUrlField";
 
 interface PostFormProps {
   post?: Post | null;
@@ -23,7 +22,7 @@ const emptyForm: PostFormData = {
   body: "",
   publishedAt: "",
   status: "draft",
-  imageFile: null,
+  imageUrl: "",
 };
 
 function toFormData(post?: Post | null): PostFormData {
@@ -34,7 +33,7 @@ function toFormData(post?: Post | null): PostFormData {
     body: post.body,
     publishedAt: post.publishedAt.toISOString().slice(0, 16),
     status: post.status,
-    imageFile: null,
+    imageUrl: post.imageUrl ?? "",
   };
 }
 
@@ -45,19 +44,7 @@ function toFormData(post?: Post | null): PostFormData {
  */
 export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
   const [form, setForm] = useState<PostFormData>(() => toFormData(post));
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>(post?.imageUrl);
   const [submitting, setSubmitting] = useState(false);
-
-  function handleFileSelect(file: File | null) {
-    setForm((prev) => ({ ...prev, imageFile: file }));
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
-    } else if (post?.imageUrl) {
-      setPreviewUrl(post.imageUrl);
-    } else {
-      setPreviewUrl(undefined);
-    }
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -69,25 +56,9 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
     setSubmitting(true);
     try {
       const publishedAt = new Date(form.publishedAt);
+      const imageUrl = form.imageUrl.trim() || undefined;
 
       if (post) {
-        let imageUrl = post.imageUrl;
-        let imagePath = post.imagePath;
-
-        if (form.imageFile) {
-          if (post.imagePath) {
-            try {
-              await deletePostImage(post.imagePath);
-            } catch (err) {
-              // ignore if old image already deleted, but keep the reason visible
-              console.warn("Could not delete previous post image:", describeError(err));
-            }
-          }
-          const uploaded = await uploadPostImage(post.id, form.imageFile);
-          imageUrl = uploaded.imageUrl;
-          imagePath = uploaded.imagePath;
-        }
-
         await updatePost(post.id, {
           title: form.title.trim(),
           excerpt: form.excerpt.trim(),
@@ -95,25 +66,17 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
           publishedAt,
           status: form.status,
           imageUrl,
-          imagePath,
         });
         toast.success("Post updated successfully.");
       } else {
-        const id = await createPost({
+        await createPost({
           title: form.title.trim(),
           excerpt: form.excerpt.trim(),
           body: form.body.trim(),
           publishedAt,
           status: form.status,
+          imageUrl,
         });
-
-        if (form.imageFile) {
-          const uploaded = await uploadPostImage(id, form.imageFile);
-          await updatePost(id, {
-            imageUrl: uploaded.imageUrl,
-            imagePath: uploaded.imagePath,
-          });
-        }
         toast.success("Post created successfully.");
       }
 
@@ -172,10 +135,10 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
         </select>
       </div>
 
-      <ImageUpload
-        label="Cover Image"
-        currentUrl={previewUrl}
-        onFileSelect={handleFileSelect}
+      <ImageUrlField
+        label="Cover Image URL"
+        value={form.imageUrl}
+        onChange={(imageUrl) => setForm((prev) => ({ ...prev, imageUrl }))}
       />
 
       <div className="flex gap-3 pt-2">
@@ -194,14 +157,6 @@ export async function handleDeletePost(post: Post, onSuccess: () => void) {
   if (!confirm(`Delete "${post.title}"? This cannot be undone.`)) return;
 
   try {
-    if (post.imagePath) {
-      try {
-        await deletePostImage(post.imagePath);
-      } catch (err) {
-        // ignore if image already deleted, but keep the reason visible
-        console.warn("Could not delete post image:", describeError(err));
-      }
-    }
     await deletePost(post.id);
     toast.success("Post deleted.");
     onSuccess();

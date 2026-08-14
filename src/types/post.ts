@@ -33,5 +33,6 @@ export interface PostFormData {
   body: string;
   publishedAt: string;
   status: PostStatus;
-  imageFile?: File | null;
+  // Pasted link rather than an uploaded file — see ImageUrlField for why.
+  imageUrl: string;
 }

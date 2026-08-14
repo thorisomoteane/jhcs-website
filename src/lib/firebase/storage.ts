@@ -1,5 +1,10 @@
 "use client";
 
+// Not currently called from anywhere: EventForm/PostForm use ImageUrlField
+// (a pasted link) instead, because Firebase Storage requires the Blaze
+// (pay-as-you-go) plan and this project is deliberately staying on the free
+// Spark plan for now. Left in place — correct and ready to wire back into
+// those forms in place of ImageUrlField once Storage is enabled.
 import {
   deleteObject,
   getDownloadURL,
