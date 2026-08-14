@@ -182,6 +182,12 @@ export async function deletePost(id: string): Promise<void> {
   await deleteDoc(doc(getDb(), POSTS_COLLECTION, id));
 }
 
+export async function getPostById(id: string): Promise<Post | null> {
+  const snapshot = await getDoc(doc(getDb(), POSTS_COLLECTION, id));
+  if (!snapshot.exists()) return null;
+  return mapPost(snapshot.id, snapshot.data() as PostDocument);
+}
+
 /* ---------------------------------------------------------- volunteers -- */
 
 export async function createVolunteerApplication(
