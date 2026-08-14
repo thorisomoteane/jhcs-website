@@ -38,7 +38,7 @@ export default function AdminEventsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-navy-900">Events</h1>
+          <h1 className="font-serif text-2xl font-bold text-forest-900">Events</h1>
           <p className="mt-1 text-sm text-gray-500">
             Create and manage events shown on the public site.
           </p>
@@ -48,7 +48,7 @@ export default function AdminEventsPage() {
 
       {formOpen && (
         <Card hover={false}>
-          <h2 className="mb-5 text-lg font-semibold text-navy-900">
+          <h2 className="mb-5 text-lg font-semibold text-forest-900">
             {editing ? "Edit Event" : "New Event"}
           </h2>
           {/* key remounts the form when switching records, so it re-seeds

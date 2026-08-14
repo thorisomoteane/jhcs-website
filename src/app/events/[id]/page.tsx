@@ -19,7 +19,7 @@ export default function EventDetailPage(props: PageProps<"/events/[id]">) {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       <Link
         href="/events"
-        className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-amber-600 hover:text-amber-500"
+        className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-forest-700 hover:text-forest-600"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to events
@@ -56,7 +56,7 @@ export default function EventDetailPage(props: PageProps<"/events/[id]">) {
             </p>
           </div>
 
-          <h1 className="mb-6 text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
+          <h1 className="mb-6 font-serif text-3xl font-bold tracking-tight text-forest-900 md:text-4xl">
             {event.title}
           </h1>
 

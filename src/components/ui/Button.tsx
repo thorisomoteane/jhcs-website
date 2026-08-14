@@ -23,10 +23,10 @@ interface ButtonProps extends HTMLMotionProps<"button"> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-amber-500 text-navy-900 hover:bg-amber-400 shadow-md shadow-amber-500/20",
+    "bg-forest-700 text-white hover:bg-forest-600 shadow-md shadow-forest-700/20",
   secondary:
-    "border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white",
-  ghost: "text-navy-900 hover:bg-gray-100",
+    "border-2 border-forest-700 text-forest-700 hover:bg-forest-700 hover:text-white",
+  ghost: "text-forest-700 hover:bg-forest-100",
   danger: "bg-red-600 text-white hover:bg-red-700",
 };
 
@@ -45,7 +45,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    "inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-700 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
     variantStyles[variant],
     sizeStyles[size],
     className,

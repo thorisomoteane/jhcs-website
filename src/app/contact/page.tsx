@@ -32,7 +32,7 @@ export default function ContactPage() {
               />
               <ContactInfo />
               <Card hover={false}>
-                <h3 className="mb-4 text-lg font-semibold text-navy-900">
+                <h3 className="mb-4 text-lg font-semibold text-forest-900">
                   Follow Our Work
                 </h3>
                 <SocialLinks />

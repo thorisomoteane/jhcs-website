@@ -39,7 +39,7 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
     return (
       <div className="flex flex-col items-center gap-4 py-24 text-center">
         <p className="text-gray-500">Redirecting to sign in…</p>
-        <Link href="/admin/login" className="text-sm font-medium text-amber-600 hover:underline">
+        <Link href="/admin/login" className="text-sm font-medium text-forest-700 hover:underline">
           Go to sign in
         </Link>
       </div>

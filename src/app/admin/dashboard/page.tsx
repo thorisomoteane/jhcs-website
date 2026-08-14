@@ -45,7 +45,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-navy-900">Overview</h1>
+        <h1 className="font-serif text-2xl font-bold text-forest-900">Overview</h1>
         <p className="mt-1 text-sm text-gray-500">
           {user?.email ? `Signed in as ${user.email}` : "Dashboard"}
         </p>
@@ -57,13 +57,13 @@ export default function AdminDashboardPage() {
         {stats.map((stat) => (
           <Link key={stat.label} href={stat.href} className="block">
             <Card className="h-full">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-amber-500/10">
-                <stat.icon className="h-5 w-5 text-amber-500" />
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-forest-700/10">
+                <stat.icon className="h-5 w-5 text-forest-700" />
               </div>
-              <p className="text-3xl font-bold text-navy-900">
+              <p className="text-3xl font-bold text-forest-900">
                 {stat.loading ? "—" : stat.value}
               </p>
-              <p className="mt-1 text-sm font-medium text-navy-900">{stat.label}</p>
+              <p className="mt-1 text-sm font-medium text-forest-900">{stat.label}</p>
               <p className="mt-1 text-xs text-gray-500">
                 {stat.loading ? "Loading…" : stat.total}
               </p>

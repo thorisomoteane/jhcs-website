@@ -45,7 +45,7 @@ export function VolunteerTable({ volunteers, onRefresh }: VolunteerTableProps) {
         cell: (info) => (
           <a
             href={`mailto:${info.getValue()}`}
-            className="text-amber-600 hover:underline"
+            className="text-forest-700 hover:underline"
           >
             {info.getValue()}
           </a>
@@ -56,7 +56,7 @@ export function VolunteerTable({ volunteers, onRefresh }: VolunteerTableProps) {
         cell: (info) => (
           <a
             href={`tel:${info.getValue().replace(/\s/g, "")}`}
-            className="text-amber-600 hover:underline"
+            className="text-forest-700 hover:underline"
           >
             {info.getValue()}
           </a>

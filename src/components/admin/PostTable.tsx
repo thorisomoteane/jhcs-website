@@ -35,7 +35,7 @@ export function PostTable({ posts, onEdit, onRefresh }: PostTableProps) {
         <tbody>
           {posts.map((post) => (
             <tr key={post.id} className="border-b border-gray-100 hover:bg-gray-50">
-              <td className="px-4 py-3 font-medium text-navy-900">{post.title}</td>
+              <td className="px-4 py-3 font-medium text-forest-900">{post.title}</td>
               <td className="px-4 py-3 text-gray-600">
                 {formatEventDateTime(post.publishedAt)}
               </td>

@@ -13,10 +13,10 @@ export default function Error({
   return (
     <div className="flex flex-1 items-center justify-center px-4 py-24">
       <div className="max-w-md space-y-4 text-center">
-        <p className="text-sm font-semibold uppercase tracking-widest text-amber-500">
+        <p className="text-sm font-semibold uppercase tracking-widest text-forest-700">
           Something went wrong
         </p>
-        <h1 className="text-3xl font-bold tracking-tight text-navy-900">
+        <h1 className="text-3xl font-bold tracking-tight text-forest-900">
           We hit an unexpected error
         </h1>
         <p className="leading-relaxed text-gray-600">

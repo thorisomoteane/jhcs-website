@@ -16,13 +16,13 @@ interface BadgeProps {
 
 const variantStyles = {
   default: "bg-gray-100 text-gray-700",
-  upcoming: "bg-emerald-100 text-emerald-800",
-  past: "bg-gray-100 text-gray-600",
-  new: "bg-amber-100 text-amber-800",
+  upcoming: "bg-tan-100 text-tan-700",
+  past: "bg-forest-100 text-forest-700",
+  new: "bg-tan-100 text-tan-700",
   contacted: "bg-blue-100 text-blue-800",
   archived: "bg-gray-100 text-gray-500",
-  draft: "bg-orange-100 text-orange-800",
-  published: "bg-emerald-100 text-emerald-800",
+  draft: "bg-tan-100 text-tan-700",
+  published: "bg-forest-100 text-forest-700",
 };
 
 export function Badge({ children, variant = "default", className }: BadgeProps) {

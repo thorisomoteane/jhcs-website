@@ -41,8 +41,8 @@ export const IMPACT_AREAS = [
 ] as const;
 
 export const DONATION_BREAKDOWN = [
-  { label: "Food Programmes", percentage: 40, color: "bg-amber-500" },
-  { label: "Shelter Support", percentage: 35, color: "bg-navy-700" },
+  { label: "Food Programmes", percentage: 40, color: "bg-forest-700" },
+  { label: "Shelter Support", percentage: 35, color: "bg-tan-700" },
   { label: "Water Logistics", percentage: 25, color: "bg-sky-500" },
 ] as const;
 

@@ -52,10 +52,10 @@ export default function VolunteerPage() {
           <div className="grid gap-6 md:grid-cols-3">
             {ways.map((way) => (
               <Card key={way.title} className="h-full">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500/10">
-                  <way.icon className="h-6 w-6 text-amber-500" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-forest-700/10">
+                  <way.icon className="h-6 w-6 text-forest-700" />
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-navy-900">
+                <h3 className="mb-2 text-lg font-semibold text-forest-900">
                   {way.title}
                 </h3>
                 <p className="text-sm text-gray-600">{way.description}</p>
@@ -65,7 +65,7 @@ export default function VolunteerPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-16 md:py-20">
+      <section className="bg-cream-50 py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Apply"

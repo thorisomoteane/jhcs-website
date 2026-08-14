@@ -16,20 +16,20 @@ export function ContactInfo() {
       {items.map((item) => (
         <Card key={item.label} hover={false}>
           <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-500/10">
-              <item.icon className="h-5 w-5 text-amber-500" />
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-forest-700/10">
+              <item.icon className="h-5 w-5 text-forest-700" />
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">{item.label}</p>
               {item.href ? (
                 <a
                   href={item.href}
-                  className="font-semibold text-navy-900 hover:text-amber-600"
+                  className="font-semibold text-forest-900 hover:text-forest-700"
                 >
                   {item.value}
                 </a>
               ) : (
-                <p className="font-semibold text-navy-900">{item.value}</p>
+                <p className="font-semibold text-forest-900">{item.value}</p>
               )}
             </div>
           </div>

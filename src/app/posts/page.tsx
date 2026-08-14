@@ -24,7 +24,7 @@ export default function PostsPage() {
       />
 
       <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           {loading ? (
             <LoadingState label="Loading news…" />
           ) : error ? (

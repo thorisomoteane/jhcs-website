@@ -36,7 +36,7 @@ export function ImageUrlField({
 
   return (
     <div className={cn("space-y-3", className)}>
-      <label htmlFor="image-url" className="block text-sm font-medium text-navy-900">
+      <label htmlFor="image-url" className="block text-sm font-medium text-forest-900">
         {label}
       </label>
       <input
@@ -48,7 +48,7 @@ export function ImageUrlField({
           onChange(e.target.value);
         }}
         placeholder="https://images.unsplash.com/..."
-        className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-navy-900 placeholder:text-gray-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+        className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-forest-900 placeholder:text-gray-400 focus:border-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-700/20"
       />
       <p className="text-xs text-gray-500">
         Paste a link to an image already hosted online — file upload needs

@@ -119,7 +119,7 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
       />
 
       <div className="space-y-2">
-        <label htmlFor="post-status" className="block text-sm font-medium text-navy-900">
+        <label htmlFor="post-status" className="block text-sm font-medium text-forest-900">
           Status
         </label>
         <select
@@ -128,7 +128,7 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
           onChange={(e) =>
             setForm((prev) => ({ ...prev, status: e.target.value as PostStatus }))
           }
-          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-navy-900 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-forest-900 focus:border-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-700/20"
         >
           <option value="draft">Draft — not visible on the site</option>
           <option value="published">Published — live on /posts</option>

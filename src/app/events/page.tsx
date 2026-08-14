@@ -28,7 +28,7 @@ export default function EventsPage() {
       />
 
       <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl space-y-10 px-4 sm:px-6 lg:px-8">
           <EventFilters
             active={filter}
             onChange={setFilter}

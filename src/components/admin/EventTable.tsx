@@ -33,7 +33,7 @@ export function EventTable({ events, onEdit, onRefresh }: EventTableProps) {
         <tbody>
           {events.map((event) => (
             <tr key={event.id} className="border-b border-gray-100 hover:bg-gray-50">
-              <td className="px-4 py-3 font-medium text-navy-900">{event.title}</td>
+              <td className="px-4 py-3 font-medium text-forest-900">{event.title}</td>
               <td className="px-4 py-3 text-gray-600">
                 {formatEventDateTime(event.date)}
               </td>

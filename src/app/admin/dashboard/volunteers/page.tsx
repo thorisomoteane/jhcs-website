@@ -11,7 +11,7 @@ export default function AdminVolunteersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-navy-900">Volunteers</h1>
+        <h1 className="font-serif text-2xl font-bold text-forest-900">Volunteers</h1>
         <p className="mt-1 text-sm text-gray-500">
           Applications submitted through the public volunteer form.
         </p>

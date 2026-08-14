@@ -51,13 +51,13 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-16">
+    <div className="flex min-h-screen items-center justify-center bg-cream-50 px-4 py-16">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500 text-xl font-bold text-navy-900">
-            J
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-forest-700 text-xl font-bold text-white">
+            {SITE_SHORT_NAME.charAt(0)}
           </div>
-          <h1 className="text-2xl font-bold text-navy-900">
+          <h1 className="font-serif text-2xl font-bold text-forest-900">
             {SITE_SHORT_NAME} Admin
           </h1>
           <p className="mt-1 text-sm text-gray-500">
@@ -96,7 +96,7 @@ export default function AdminLoginPage() {
         )}
 
         <p className="text-center text-sm text-gray-500">
-          <Link href="/" className="font-medium text-amber-600 hover:underline">
+          <Link href="/" className="font-medium text-forest-700 hover:underline">
             Back to website
           </Link>
         </p>

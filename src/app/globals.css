@@ -1,16 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f2e7;
+  --foreground: #16301f;
 }
 
-/* Brand palette. Plain @theme (not inline) so utilities resolve through
-   var(--color-navy-*), which is what makes opacity modifiers and gradient
-   stops like from-navy-900/90 work. Hexes mirror src/lib/constants/theme.ts. */
+/*
+ * Brand palette: forest green + warm cream, replacing an earlier navy/amber
+ * scheme to match a reference design. "forest" plays both roles navy and
+ * amber used to (dark surfaces AND the single accent color) — the reference
+ * doesn't use two separate accent hues, just one green across every dark
+ * surface, button, active-nav-state, and badge.
+ */
 @theme {
-  --color-navy-700: #1a3a6b;
-  --color-navy-900: #0b1d3a;
+  --color-forest-950: #0f2318;
+  --color-forest-900: #16301f;
+  --color-forest-800: #1d4a2e;
+  --color-forest-700: #245c39;
+  --color-forest-600: #2f7248;
+  --color-forest-500: #3d8759;
+  --color-forest-100: #dcebe0;
+
+  --color-cream: #f7f2e7;
+  --color-cream-50: #fbf8f1;
+
+  /* "Upcoming" badge only — a warm tan, distinct from the brand green. */
+  --color-tan-100: #f3e2c7;
+  --color-tan-700: #8a5a2e;
 }
 
 @theme inline {
@@ -18,6 +34,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 }
 
 body {

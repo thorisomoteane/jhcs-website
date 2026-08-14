@@ -13,11 +13,11 @@ export function Footer() {
   }
 
   return (
-    <footer className="mt-auto bg-navy-900 text-gray-300">
+    <footer className="mt-auto bg-forest-900 text-gray-300">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3">
           <div>
-            <h3 className="mb-4 text-lg font-bold text-white">{SITE_NAME}</h3>
+            <h3 className="mb-4 font-serif text-lg font-bold text-white">{SITE_NAME}</h3>
             <p className="text-sm leading-relaxed">{LEGAL_TEXT}</p>
           </div>
 
@@ -28,7 +28,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm transition-colors hover:text-amber-400"
+                    className="text-sm transition-colors hover:text-forest-100"
                   >
                     {link.label}
                   </Link>
@@ -43,7 +43,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-navy-700 pt-8 text-center text-sm">
+        <div className="mt-8 border-t border-forest-700 pt-8 text-center text-sm">
           <p>&copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.</p>
         </div>
       </div>

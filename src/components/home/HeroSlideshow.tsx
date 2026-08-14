@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { HERO_SLIDES } from "@/lib/constants/site";
 import { Button } from "@/components/ui/Button";
 
@@ -44,7 +45,7 @@ export function HeroSlideshow() {
         )}
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-900/90 via-navy-900/70 to-navy-900/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-900/90 via-forest-900/70 to-forest-900/40" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <motion.div
@@ -53,10 +54,10 @@ export function HeroSlideshow() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-2xl"
         >
-          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-amber-400">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-forest-100">
             Jan Hofmeyer Community Services
           </p>
-          <h1 className="mb-6 text-4xl font-bold leading-tight text-white md:text-6xl">
+          <h1 className="mb-6 font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
             Hope, Dignity &amp; Care for Our Communities
           </h1>
           <p className="mb-8 text-lg leading-relaxed text-gray-200 md:text-xl">
@@ -66,8 +67,14 @@ export function HeroSlideshow() {
           <div className="flex flex-wrap gap-4">
             <Button href="/donate" size="lg">
               Donate
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button href="/volunteer" variant="secondary" size="lg" className="border-white text-white hover:bg-white hover:text-navy-900">
+            <Button
+              href="/volunteer"
+              variant="secondary"
+              size="lg"
+              className="border-white text-white hover:bg-white hover:text-forest-900"
+            >
               Volunteer
             </Button>
           </div>
@@ -80,7 +87,7 @@ export function HeroSlideshow() {
               type="button"
               onClick={() => setCurrent(index)}
               className={`h-2 rounded-full transition-all ${
-                index === current ? "w-8 bg-amber-500" : "w-2 bg-white/50"
+                index === current ? "w-8 bg-white" : "w-2 bg-white/50"
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />

@@ -24,7 +24,7 @@ export default function PostDetailPage(props: PageProps<"/posts/[id]">) {
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
       <Link
         href="/posts"
-        className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-amber-600 hover:text-amber-500"
+        className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-forest-700 hover:text-forest-600"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to news
@@ -53,12 +53,12 @@ export default function PostDetailPage(props: PageProps<"/posts/[id]">) {
             </div>
           )}
 
-          <p className="mb-4 flex items-center gap-2 text-sm text-amber-600">
+          <p className="mb-4 flex items-center gap-2 text-sm text-forest-700">
             <Newspaper className="h-4 w-4" />
             {formatEventDate(post.publishedAt)}
           </p>
 
-          <h1 className="mb-6 text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
+          <h1 className="mb-6 font-serif text-3xl font-bold tracking-tight text-forest-900 md:text-4xl">
             {post.title}
           </h1>
 

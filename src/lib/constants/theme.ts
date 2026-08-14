@@ -1,8 +1,12 @@
+// Reference copy of the hex values registered as Tailwind tokens in
+// src/app/globals.css's @theme block. Not imported anywhere in the app —
+// kept as a single documented source for the brand palette.
 export const colors = {
-  navy900: "#0B1D3A",
-  navy700: "#1A3A6B",
-  amber500: "#F59E0B",
-  amber400: "#FBBF24",
+  forest900: "#16301F",
+  forest700: "#245C39",
+  cream: "#F7F2E7",
+  tan100: "#F3E2C7",
+  tan700: "#8A5A2E",
   gray50: "#F9FAFB",
   gray100: "#F3F4F6",
   white: "#FFFFFF",

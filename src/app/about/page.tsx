@@ -39,7 +39,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-16 md:py-20">
+      <section className="bg-cream-50 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Where We Work"
@@ -50,7 +50,7 @@ export default function AboutPage() {
           <div className="grid gap-6 md:grid-cols-3">
             {COMMUNITIES.map((community) => (
               <Card key={community} className="text-center">
-                <p className="text-xl font-bold text-navy-900">{community}</p>
+                <p className="text-xl font-bold text-forest-900">{community}</p>
                 <p className="mt-2 text-sm text-gray-600">
                   Food, shelter and water programmes delivered in partnership with
                   local residents.

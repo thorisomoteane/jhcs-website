@@ -14,7 +14,7 @@ const iconMap = {
 
 export function ImpactCards() {
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-cream-50 py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Our Impact"
@@ -35,11 +35,11 @@ export function ImpactCards() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Card className="h-full text-center">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10">
-                    <Icon className="h-7 w-7 text-amber-500" />
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-forest-700/10">
+                    <Icon className="h-7 w-7 text-forest-700" />
                   </div>
-                  <p className="mb-1 text-3xl font-bold text-navy-900">{area.stat}</p>
-                  <h3 className="mb-2 text-xl font-semibold text-navy-900">{area.title}</h3>
+                  <p className="mb-1 font-serif text-3xl font-bold text-forest-900">{area.stat}</p>
+                  <h3 className="mb-2 text-xl font-semibold text-forest-900">{area.title}</h3>
                   <p className="text-gray-600">{area.description}</p>
                 </Card>
               </motion.div>

@@ -14,12 +14,12 @@ export function BankingDetails() {
 
   return (
     <Card>
-      <h3 className="mb-4 text-xl font-bold text-navy-900">EFT Banking Details</h3>
+      <h3 className="mb-4 text-xl font-bold text-forest-900">EFT Banking Details</h3>
       <dl className="space-y-3">
         {details.map((item) => (
           <div key={item.label} className="flex justify-between border-b border-gray-100 pb-3 last:border-0">
             <dt className="text-sm font-medium text-gray-500">{item.label}</dt>
-            <dd className="text-sm font-semibold text-navy-900">{item.value}</dd>
+            <dd className="text-sm font-semibold text-forest-900">{item.value}</dd>
           </div>
         ))}
       </dl>

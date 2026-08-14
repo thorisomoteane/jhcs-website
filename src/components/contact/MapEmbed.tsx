@@ -20,7 +20,7 @@ export function MapEmbed() {
           href={`https://www.openstreetmap.org/search?query=${encodedAddress}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm font-medium text-amber-600 hover:text-amber-500"
+          className="text-sm font-medium text-forest-700 hover:text-forest-600"
         >
           View larger map
         </a>

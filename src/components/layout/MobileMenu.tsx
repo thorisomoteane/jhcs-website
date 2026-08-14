@@ -17,14 +17,14 @@ export function MobileMenu() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="rounded-lg p-2 text-white hover:bg-navy-700"
+        className="rounded-lg p-2 text-gray-700 hover:bg-forest-100"
         aria-label={open ? "Close menu" : "Open menu"}
       >
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
 
       {open && (
-        <div className="absolute left-0 right-0 top-full border-t border-navy-700 bg-navy-900 px-4 py-4 shadow-lg">
+        <div className="absolute left-0 right-0 top-full border-t border-gray-100 bg-white px-4 py-4 shadow-lg">
           <nav className="flex flex-col gap-2">
             {NAV_LINKS.map((link) => (
               <Link
@@ -34,8 +34,8 @@ export function MobileMenu() {
                 className={cn(
                   "rounded-lg px-4 py-3 text-sm font-medium transition-colors",
                   pathname === link.href
-                    ? "bg-navy-700 text-amber-400"
-                    : "text-white hover:bg-navy-700",
+                    ? "bg-forest-100 text-forest-700"
+                    : "text-gray-700 hover:bg-forest-100",
                 )}
               >
                 {link.label}

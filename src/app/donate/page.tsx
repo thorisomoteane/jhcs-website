@@ -45,10 +45,10 @@ export default function DonatePage() {
           <div className="grid gap-6 md:grid-cols-3">
             {assurances.map((item) => (
               <Card key={item.title}>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500/10">
-                  <item.icon className="h-6 w-6 text-amber-500" />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-forest-700/10">
+                  <item.icon className="h-6 w-6 text-forest-700" />
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-navy-900">
+                <h3 className="mb-2 text-lg font-semibold text-forest-900">
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
@@ -58,7 +58,7 @@ export default function DonatePage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-16 md:py-20">
+      <section className="bg-cream-50 py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How To Give"
@@ -76,7 +76,7 @@ export default function DonatePage() {
       <section className="py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <Card hover={false}>
-            <h3 className="mb-3 text-xl font-bold text-navy-900">
+            <h3 className="mb-3 text-xl font-bold text-forest-900">
               Tax Deductibility
             </h3>
             <p className="leading-relaxed text-gray-600">{SECTION_18A_INFO}</p>

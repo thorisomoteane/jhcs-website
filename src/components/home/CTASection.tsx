@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function CTASection() {
   return (
-    <section className="bg-navy-900 py-20">
+    <section className="bg-forest-900 py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -29,7 +29,7 @@ export function CTASection() {
               href="/volunteer"
               variant="secondary"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-navy-900"
+              className="border-white text-white hover:bg-white hover:text-forest-900"
             >
               Become a Volunteer
             </Button>

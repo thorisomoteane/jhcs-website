@@ -7,18 +7,18 @@ interface PageHeroProps {
   className?: string;
 }
 
-/** Navy banner used as the masthead on every non-home public page. */
+/** Dark forest-green banner used as the masthead on every non-home public page. */
 export function PageHero({ eyebrow, title, subtitle, className }: PageHeroProps) {
   return (
-    <section className={cn("bg-navy-900", className)}>
+    <section className={cn("bg-forest-900", className)}>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="max-w-3xl space-y-4">
           {eyebrow && (
-            <p className="text-sm font-semibold uppercase tracking-widest text-amber-400">
+            <p className="text-sm font-semibold uppercase tracking-widest text-forest-100">
               {eyebrow}
             </p>
           )}
-          <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+          <h1 className="font-serif text-4xl font-bold tracking-tight text-white md:text-5xl">
             {title}
           </h1>
           {subtitle && (

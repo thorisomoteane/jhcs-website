@@ -25,7 +25,7 @@ export function EventFilters({
           className={cn(
             "rounded-lg px-6 py-2.5 text-sm font-semibold capitalize transition-colors",
             active === filter
-              ? "bg-navy-900 text-white"
+              ? "bg-forest-900 text-white"
               : "bg-gray-100 text-gray-600 hover:bg-gray-200",
           )}
         >
