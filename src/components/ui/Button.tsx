@@ -1,16 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+/**
+ * Extends HTMLMotionProps rather than React.ButtonHTMLAttributes: framer-motion
+ * re-types onDrag/onDragStart/onDragEnd/onAnimationStart/style with its own
+ * signatures, so spreading raw React button attrs onto motion.button is a type
+ * error. HTMLMotionProps has already reconciled them.
+ * `children` is narrowed back to ReactNode so it can also be passed to <Link>.
+ */
+interface ButtonProps extends HTMLMotionProps<"button"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   href?: string;
+  children?: React.ReactNode;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -45,7 +53,11 @@ export function Button({
 
   if (href) {
     return (
-      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="inline-flex"
+      >
         <Link href={href} className={classes}>
           {children}
         </Link>

@@ -34,7 +34,9 @@ export function HeroSlideshow() {
                   src={slide.src}
                   alt={slide.alt}
                   fill
-                  priority={index === 0}
+                  sizes="100vw"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   className="object-cover"
                 />
               </motion.div>

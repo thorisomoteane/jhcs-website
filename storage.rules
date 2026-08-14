@@ -1,0 +1,38 @@
+rules_version = '2';
+
+// Starter Storage rules for event and post cover images.
+// Deploy with: firebase deploy --only storage
+//
+// Images are served publicly via next/image, so reads are open. Writes are
+// restricted to signed-in users, size-capped, and limited to image MIME types
+// so the bucket can't be used as free file hosting.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidImage() {
+      return request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /events/{eventId}/{fileName} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidImage();
+      allow delete: if isSignedIn();
+    }
+
+    match /posts/{postId}/{fileName} {
+      allow read: if true;
+      allow write: if isSignedIn() && isValidImage();
+      allow delete: if isSignedIn();
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

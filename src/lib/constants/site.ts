@@ -10,6 +10,7 @@ export const MISSION =
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
+  { href: "/posts", label: "News" },
   { href: "/about", label: "About" },
   { href: "/donate", label: "Donate" },
   { href: "/volunteer", label: "Volunteer" },
@@ -53,6 +54,8 @@ export const ABOUT_HISTORY = [
 
 export const SECTION_18A_INFO =
   "As a SARS Section 18A registered organisation, your donations to JHCS are tax-deductible. You will receive a Section 18A certificate for qualifying donations, which can be submitted with your annual tax return.";
+
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://jhcs.org.za";
 
 export function getSiteConfig() {
   return {

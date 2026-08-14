@@ -3,20 +3,44 @@
 import { useRef } from "react";
 import { Upload, X } from "lucide-react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 import { cn } from "@/lib/utils/cn";
+
+// Mirrors the cap enforced in storage.rules — reject here so the user gets a
+// clear message instead of an opaque permission error from Firebase.
+const MAX_BYTES = 5 * 1024 * 1024;
 
 interface ImageUploadProps {
   currentUrl?: string;
   onFileSelect: (file: File | null) => void;
   className?: string;
+  label?: string;
 }
 
-export function ImageUpload({ currentUrl, onFileSelect, className }: ImageUploadProps) {
+export function ImageUpload({
+  currentUrl,
+  onFileSelect,
+  className,
+  label = "Event Image",
+}: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const previewUrl = currentUrl;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0] ?? null;
+
+    if (file && !file.type.startsWith("image/")) {
+      toast.error("Please choose an image file.");
+      if (inputRef.current) inputRef.current.value = "";
+      return;
+    }
+
+    if (file && file.size > MAX_BYTES) {
+      toast.error("That image is larger than 5MB. Please choose a smaller file.");
+      if (inputRef.current) inputRef.current.value = "";
+      return;
+    }
+
     onFileSelect(file);
   }
 
@@ -27,11 +51,20 @@ export function ImageUpload({ currentUrl, onFileSelect, className }: ImageUpload
 
   return (
     <div className={cn("space-y-3", className)}>
-      <label className="block text-sm font-medium text-navy-900">Event Image</label>
+      <label className="block text-sm font-medium text-navy-900">{label}</label>
 
       {previewUrl ? (
         <div className="relative aspect-video w-full max-w-sm overflow-hidden rounded-lg border border-gray-200">
-          <Image src={previewUrl} alt="Event preview" fill className="object-cover" />
+          {/* previewUrl is a blob: URL for a freshly picked file, which the
+              optimizer cannot fetch — skip it. */}
+          <Image
+            src={previewUrl}
+            alt="Event preview"
+            fill
+            sizes="384px"
+            unoptimized={previewUrl.startsWith("blob:")}
+            className="object-cover"
+          />
           <button
             type="button"
             onClick={handleClear}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import type { Event, EventFormData } from "@/types/event";
 import {
@@ -28,25 +28,27 @@ const emptyForm: EventFormData = {
   imageFile: null,
 };
 
-export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
-  const [form, setForm] = useState<EventFormData>(emptyForm);
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>();
-  const [submitting, setSubmitting] = useState(false);
+function toFormData(event?: Event | null): EventFormData {
+  if (!event) return emptyForm;
+  return {
+    title: event.title,
+    description: event.description,
+    date: event.date.toISOString().slice(0, 16),
+    imageFile: null,
+  };
+}
 
-  useEffect(() => {
-    if (event) {
-      setForm({
-        title: event.title,
-        description: event.description,
-        date: event.date.toISOString().slice(0, 16),
-        imageFile: null,
-      });
-      setPreviewUrl(event.imageUrl);
-    } else {
-      setForm(emptyForm);
-      setPreviewUrl(undefined);
-    }
-  }, [event]);
+/**
+ * Callers must pass a `key` that changes with the event being edited (see
+ * the admin events page) — the initial state below is seeded once per mount
+ * rather than re-synced from props by an effect.
+ */
+export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
+  const [form, setForm] = useState<EventFormData>(() => toFormData(event));
+  const [previewUrl, setPreviewUrl] = useState<string | undefined>(
+    event?.imageUrl,
+  );
+  const [submitting, setSubmitting] = useState(false);
 
   function handleFileSelect(file: File | null) {
     setForm((prev) => ({ ...prev, imageFile: file }));

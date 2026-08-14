@@ -1,27 +1,26 @@
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import {
+  SiFacebook,
+  SiInstagram,
+  SiX,
+  SiYoutube,
+} from "@icons-pack/react-simple-icons";
 import { getSiteConfig } from "@/lib/constants/site";
 import { cn } from "@/lib/utils/cn";
-
-function XIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
 
 interface SocialLinksProps {
   variant?: "default" | "footer";
 }
 
+// lucide-react v1 dropped all brand icons, so these come from simple-icons.
+// They default to color="currentColor", which keeps the hover styles below working.
 export function SocialLinks({ variant = "default" }: SocialLinksProps) {
   const { social } = getSiteConfig();
 
   const links = [
-    { href: social.facebook, label: "Facebook", icon: Facebook },
-    { href: social.instagram, label: "Instagram", icon: Instagram },
-    { href: social.x, label: "X (Twitter)", icon: XIcon },
-    { href: social.youtube, label: "YouTube", icon: Youtube },
+    { href: social.facebook, label: "Facebook", icon: SiFacebook },
+    { href: social.instagram, label: "Instagram", icon: SiInstagram },
+    { href: social.x, label: "X (Twitter)", icon: SiX },
+    { href: social.youtube, label: "YouTube", icon: SiYoutube },
   ];
 
   return (
@@ -40,7 +39,7 @@ export function SocialLinks({ variant = "default" }: SocialLinksProps) {
               : "bg-gray-100 text-navy-900 hover:bg-amber-500 hover:text-navy-900",
           )}
         >
-          <link.icon className="h-5 w-5" />
+          <link.icon className="h-5 w-5" title={link.label} />
         </a>
       ))}
     </div>

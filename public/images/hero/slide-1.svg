@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="Abstract illustration of a shared meal">
+  <defs>
+    <linearGradient id="f-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1d3a"/>
+      <stop offset="55%" stop-color="#1a3a6b"/>
+      <stop offset="100%" stop-color="#2a5591"/>
+    </linearGradient>
+    <linearGradient id="f-warm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <radialGradient id="f-glow" cx="0.72" cy="0.42" r="0.55">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#f-bg)"/>
+  <rect width="1600" height="900" fill="url(#f-glow)"/>
+
+  <!-- table surface -->
+  <path d="M0 640 Q 800 570 1600 640 L1600 900 L0 900 Z" fill="#0b1d3a" opacity="0.55"/>
+
+  <!-- central bowl -->
+  <g transform="translate(1120 430)">
+    <ellipse cx="0" cy="0" rx="235" ry="70" fill="#ffffff" opacity="0.14"/>
+    <path d="M-215 -8 A215 215 0 0 0 215 -8 Z" fill="url(#f-warm)"/>
+    <ellipse cx="0" cy="-8" rx="215" ry="62" fill="#fde68a" opacity="0.9"/>
+    <ellipse cx="-60" cy="-14" rx="52" ry="20" fill="#f59e0b" opacity="0.55"/>
+    <ellipse cx="58" cy="-2" rx="40" ry="15" fill="#f59e0b" opacity="0.4"/>
+    <rect x="-250" y="118" width="500" height="20" rx="10" fill="#ffffff" opacity="0.16"/>
+  </g>
+
+  <!-- grain / produce motifs -->
+  <g fill="#fbbf24" opacity="0.5">
+    <circle cx="330" cy="330" r="46"/>
+    <circle cx="452" cy="392" r="30"/>
+    <circle cx="250" cy="424" r="22"/>
+  </g>
+  <g stroke="#fbbf24" stroke-width="7" stroke-linecap="round" opacity="0.4" fill="none">
+    <path d="M600 300 q60 70 0 150"/>
+    <path d="M660 268 q70 90 0 190"/>
+    <path d="M540 336 q46 56 0 116"/>
+  </g>
+
+  <!-- gathering circles: people around a table -->
+  <g fill="#ffffff" opacity="0.2">
+    <circle cx="820" cy="690" r="40"/>
+    <circle cx="960" cy="728" r="40"/>
+    <circle cx="1100" cy="742" r="40"/>
+    <circle cx="1240" cy="728" r="40"/>
+    <circle cx="1380" cy="690" r="40"/>
+  </g>
+</svg>

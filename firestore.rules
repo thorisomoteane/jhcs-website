@@ -1,0 +1,64 @@
+rules_version = '2';
+
+// Starter rules for the JHCS site. Deploy with:
+//   firebase deploy --only firestore:rules
+//
+// Context: this app has no server. Every read and write below is issued
+// directly from the browser, so these rules are the ONLY thing standing
+// between the public internet and your data. The admin sign-in screen is a
+// UX gate, not a security boundary.
+//
+// TIGHTEN THIS BEFORE GOING LIVE: as written, any authenticated Firebase user
+// can write. If self-signup is ever enabled on this project, that means
+// anyone. The commented isAdmin() helper restricts writes to a named allowlist
+// of UIDs — switch to it once you know your admin UIDs.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Preferred: replace isSignedIn() with this in the write rules below.
+    // function isAdmin() {
+    //   return request.auth != null
+    //     && request.auth.uid in ['REPLACE_WITH_ADMIN_UID'];
+    // }
+
+    // Events are public content.
+    match /events/{eventId} {
+      allow read: if true;
+      allow create, update, delete: if isSignedIn();
+    }
+
+    // News posts are public content. Drafts are filtered client-side only,
+    // so treat post bodies as public the moment they are saved.
+    match /posts/{postId} {
+      allow read: if true;
+      allow create, update, delete: if isSignedIn();
+    }
+
+    // Volunteer applications contain personal information: the public form
+    // may create them, but only admins may ever read them back.
+    match /volunteer_applications/{applicationId} {
+      allow read: if isSignedIn();
+      allow create: if request.resource.data.keys().hasOnly(
+                         ['name', 'email', 'phone', 'skills', 'message', 'status', 'createdAt'])
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() < 200
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() < 320
+                    && request.resource.data.phone is string
+                    && request.resource.data.phone.size() < 50
+                    && request.resource.data.status == 'new';
+      allow update, delete: if isSignedIn();
+    }
+
+    // Anything not matched above is denied.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

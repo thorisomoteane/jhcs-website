@@ -6,12 +6,11 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
 import type { VolunteerApplication, VolunteerStatus } from "@/types/volunteer";
 import { updateVolunteerStatus } from "@/lib/firebase/firestore";
 import { formatDisplayDate } from "@/lib/utils/dates";
-import { Badge } from "@/components/ui/Badge";
 
 interface VolunteerTableProps {
   volunteers: VolunteerApplication[];
@@ -21,15 +20,20 @@ interface VolunteerTableProps {
 const columnHelper = createColumnHelper<VolunteerApplication>();
 
 export function VolunteerTable({ volunteers, onRefresh }: VolunteerTableProps) {
-  async function handleStatusChange(id: string, status: VolunteerStatus) {
-    try {
-      await updateVolunteerStatus(id, status);
-      toast.success("Status updated.");
-      onRefresh();
-    } catch {
-      toast.error("Failed to update status.");
-    }
-  }
+  // Memoised so the column definitions below can depend on it honestly,
+  // instead of capturing a stale onRefresh behind an exhaustive-deps override.
+  const handleStatusChange = useCallback(
+    async (id: string, status: VolunteerStatus) => {
+      try {
+        await updateVolunteerStatus(id, status);
+        toast.success("Status updated.");
+        onRefresh();
+      } catch {
+        toast.error("Failed to update status.");
+      }
+    },
+    [onRefresh],
+  );
 
   const columns = useMemo(
     () => [
@@ -92,8 +96,7 @@ export function VolunteerTable({ volunteers, onRefresh }: VolunteerTableProps) {
         },
       }),
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [handleStatusChange],
   );
 
   const table = useReactTable({

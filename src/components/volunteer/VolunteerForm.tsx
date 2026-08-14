@@ -3,6 +3,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { createVolunteerApplication } from "@/lib/firebase/firestore";
+import { isFirebaseConfigured } from "@/lib/firebase/config";
 import type { VolunteerFormData } from "@/types/volunteer";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -37,6 +38,13 @@ export function VolunteerForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
+
+    if (!isFirebaseConfigured()) {
+      toast.error(
+        "Applications can't be submitted yet. Please email or call us instead.",
+      );
+      return;
+    }
 
     setSubmitting(true);
     try {

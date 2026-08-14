@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { NAV_LINKS, SITE_SHORT_NAME } from "@/lib/constants/site";
+import { NAV_LINKS } from "@/lib/constants/site";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
 

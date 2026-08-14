@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import type { Event } from "@/types/event";
-import { useEvents } from "@/lib/hooks/useEvents";
+import type { Post } from "@/types/post";
+import { usePosts } from "@/lib/hooks/usePosts";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ErrorState, LoadingState } from "@/components/ui/States";
-import { EventForm } from "@/components/admin/EventForm";
-import { EventTable } from "@/components/admin/EventTable";
+import { PostForm } from "@/components/admin/PostForm";
+import { PostTable } from "@/components/admin/PostTable";
 
-export default function AdminEventsPage() {
-  const { events, loading, error, refetch } = useEvents();
-  const [editing, setEditing] = useState<Event | null>(null);
+export default function AdminPostsPage() {
+  const { posts, loading, error, refetch } = usePosts();
+  const [editing, setEditing] = useState<Post | null>(null);
   const [formOpen, setFormOpen] = useState(false);
 
   function openCreate() {
@@ -19,8 +19,8 @@ export default function AdminEventsPage() {
     setFormOpen(true);
   }
 
-  function openEdit(event: Event) {
-    setEditing(event);
+  function openEdit(post: Post) {
+    setEditing(post);
     setFormOpen(true);
   }
 
@@ -38,24 +38,24 @@ export default function AdminEventsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-navy-900">Events</h1>
+          <h1 className="text-2xl font-bold text-navy-900">News</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Create and manage events shown on the public site.
+            Write and publish updates shown on the public news page.
           </p>
         </div>
-        {!formOpen && <Button onClick={openCreate}>New Event</Button>}
+        {!formOpen && <Button onClick={openCreate}>New Post</Button>}
       </div>
 
       {formOpen && (
         <Card hover={false}>
           <h2 className="mb-5 text-lg font-semibold text-navy-900">
-            {editing ? "Edit Event" : "New Event"}
+            {editing ? "Edit Post" : "New Post"}
           </h2>
           {/* key remounts the form when switching records, so it re-seeds
-              its initial state from the new event. */}
-          <EventForm
+              its initial state from the new post. */}
+          <PostForm
             key={editing?.id ?? "new"}
-            event={editing}
+            post={editing}
             onSuccess={handleSuccess}
             onCancel={closeForm}
           />
@@ -64,13 +64,13 @@ export default function AdminEventsPage() {
 
       <Card hover={false} className="p-0">
         {loading ? (
-          <LoadingState label="Loading events…" />
+          <LoadingState label="Loading posts…" />
         ) : error ? (
           <div className="p-6">
             <ErrorState message={error} />
           </div>
         ) : (
-          <EventTable events={events} onEdit={openEdit} onRefresh={refetch} />
+          <PostTable posts={posts} onEdit={openEdit} onRefresh={refetch} />
         )}
       </Card>
     </div>

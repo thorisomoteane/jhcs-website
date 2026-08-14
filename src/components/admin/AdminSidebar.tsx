@@ -1,23 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { CalendarDays, LayoutDashboard, LogOut, Users } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { CalendarDays, LayoutDashboard, LogOut, Newspaper, Users } from "lucide-react";
 import { signOut } from "@/lib/firebase/auth";
 import { cn } from "@/lib/utils/cn";
 
 const links = [
   { href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
   { href: "/admin/dashboard/events", label: "Events", icon: CalendarDays },
+  { href: "/admin/dashboard/posts", label: "News", icon: Newspaper },
   { href: "/admin/dashboard/volunteers", label: "Volunteers", icon: Users },
 ];
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   async function handleSignOut() {
     await signOut();
-    window.location.href = "/admin/login";
+    router.replace("/admin/login");
   }
 
   return (
