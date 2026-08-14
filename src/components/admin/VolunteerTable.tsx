@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import type { VolunteerApplication, VolunteerStatus } from "@/types/volunteer";
 import { updateVolunteerStatus } from "@/lib/firebase/firestore";
 import { formatDisplayDate } from "@/lib/utils/dates";
+import { describeError } from "@/lib/utils/errors";
 
 interface VolunteerTableProps {
   volunteers: VolunteerApplication[];
@@ -28,8 +29,9 @@ export function VolunteerTable({ volunteers, onRefresh }: VolunteerTableProps) {
         await updateVolunteerStatus(id, status);
         toast.success("Status updated.");
         onRefresh();
-      } catch {
-        toast.error("Failed to update status.");
+      } catch (err) {
+        console.error("Failed to update volunteer status:", err);
+        toast.error(`Failed to update status: ${describeError(err)}`);
       }
     },
     [onRefresh],

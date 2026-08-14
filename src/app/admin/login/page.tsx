@@ -40,8 +40,10 @@ export default function AdminLoginPage() {
       await signIn(email.trim(), password);
       toast.success("Signed in.");
       router.replace("/admin/dashboard");
-    } catch {
-      // Deliberately generic: don't reveal whether the address exists.
+    } catch (err) {
+      // Toast stays deliberately generic (don't reveal whether the address
+      // exists), but log the real reason for our own debugging.
+      console.error("Sign in failed:", err);
       toast.error("Sign in failed. Check your email and password.");
     } finally {
       setSubmitting(false);

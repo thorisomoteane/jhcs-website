@@ -58,7 +58,9 @@ export function VolunteerForm() {
       toast.success("Thank you! Your volunteer application has been submitted.");
       setForm(initialForm);
       setErrors({});
-    } catch {
+    } catch (err) {
+      // Toast stays generic for the public form; log the real reason for us.
+      console.error("Failed to submit volunteer application:", err);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);

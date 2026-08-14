@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import type { Post, PostFormData, PostStatus } from "@/types/post";
 import { createPost, deletePost, updatePost } from "@/lib/firebase/firestore";
 import { deletePostImage, uploadPostImage } from "@/lib/firebase/storage";
+import { describeError } from "@/lib/utils/errors";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -77,8 +78,9 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
           if (post.imagePath) {
             try {
               await deletePostImage(post.imagePath);
-            } catch {
-              // ignore if old image already deleted
+            } catch (err) {
+              // ignore if old image already deleted, but keep the reason visible
+              console.warn("Could not delete previous post image:", describeError(err));
             }
           }
           const uploaded = await uploadPostImage(post.id, form.imageFile);
@@ -116,8 +118,9 @@ export function PostForm({ post, onSuccess, onCancel }: PostFormProps) {
       }
 
       onSuccess();
-    } catch {
-      toast.error("Failed to save post. Please try again.");
+    } catch (err) {
+      console.error("Failed to save post:", err);
+      toast.error(`Failed to save post: ${describeError(err)}`);
     } finally {
       setSubmitting(false);
     }
@@ -194,14 +197,16 @@ export async function handleDeletePost(post: Post, onSuccess: () => void) {
     if (post.imagePath) {
       try {
         await deletePostImage(post.imagePath);
-      } catch {
-        // ignore if image already deleted
+      } catch (err) {
+        // ignore if image already deleted, but keep the reason visible
+        console.warn("Could not delete post image:", describeError(err));
       }
     }
     await deletePost(post.id);
     toast.success("Post deleted.");
     onSuccess();
-  } catch {
-    toast.error("Failed to delete post.");
+  } catch (err) {
+    console.error("Failed to delete post:", err);
+    toast.error(`Failed to delete post: ${describeError(err)}`);
   }
 }

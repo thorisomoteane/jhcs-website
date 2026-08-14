@@ -10,6 +10,7 @@ import {
 } from "@/lib/firebase/firestore";
 import { deleteEventImage, uploadEventImage } from "@/lib/firebase/storage";
 import { getEventStatus } from "@/lib/utils/dates";
+import { describeError } from "@/lib/utils/errors";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -81,8 +82,9 @@ export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
           if (event.imagePath) {
             try {
               await deleteEventImage(event.imagePath);
-            } catch {
-              // ignore if old image already deleted
+            } catch (err) {
+              // ignore if old image already deleted, but keep the reason visible
+              console.warn("Could not delete previous event image:", describeError(err));
             }
           }
           const uploaded = await uploadEventImage(event.id, form.imageFile);
@@ -118,8 +120,9 @@ export function EventForm({ event, onSuccess, onCancel }: EventFormProps) {
       }
 
       onSuccess();
-    } catch {
-      toast.error("Failed to save event. Please try again.");
+    } catch (err) {
+      console.error("Failed to save event:", err);
+      toast.error(`Failed to save event: ${describeError(err)}`);
     } finally {
       setSubmitting(false);
     }
@@ -168,14 +171,16 @@ export async function handleDeleteEvent(event: Event, onSuccess: () => void) {
     if (event.imagePath) {
       try {
         await deleteEventImage(event.imagePath);
-      } catch {
-        // ignore if image already deleted
+      } catch (err) {
+        // ignore if image already deleted, but keep the reason visible
+        console.warn("Could not delete event image:", describeError(err));
       }
     }
     await deleteEvent(event.id);
     toast.success("Event deleted.");
     onSuccess();
-  } catch {
-    toast.error("Failed to delete event.");
+  } catch (err) {
+    console.error("Failed to delete event:", err);
+    toast.error(`Failed to delete event: ${describeError(err)}`);
   }
 }
